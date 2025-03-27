@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kgk_diamond/common/constants.dart';
 import 'package:kgk_diamond/data/entity/diamond_entity.dart';
 import 'package:kgk_diamond/logic/data_logic/diamond_data_cubit.dart';
 import 'package:kgk_diamond/logic/filterResult/filter_result_cubit.dart';
@@ -45,7 +46,7 @@ class _MyCartPageState extends State<MyCartPage> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("My Cart", style: TextStyle(color: Colors.white)),
+        title: Text(AppConstants.myCart, style: TextStyle(color: Colors.white)),
       ),
       body: buildBodyWidget(context),
     );
@@ -64,14 +65,14 @@ class _MyCartPageState extends State<MyCartPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Your Cart is Empty",
+                    AppConstants.emptyCartMsg,
                     style: CommonWidgets().textStyle(
                       color: Colors.grey,
                       fSize: 15,
                     ),
                   ),
                   Text(
-                    "+ Add Diamond",
+                    AppConstants.addDiamondMsg,
                     style: CommonWidgets().textStyle(
                       color: Colors.black,
                       fSize: 16,
@@ -135,11 +136,11 @@ class _MyCartPageState extends State<MyCartPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Carate'),
-                      Text('Size'),
-                      Text('Lab'),
-                      Text('Shape'),
-                      Text('Color'),
+                      Text(AppConstants.carates),
+                      Text(AppConstants.size),
+                      Text(AppConstants.labs),
+                      Text(AppConstants.shaps),
+                      Text(AppConstants.colors),
                     ],
                   ),
                 ),
@@ -161,11 +162,11 @@ class _MyCartPageState extends State<MyCartPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Cut'),
-                      Text('Polish'),
-                      Text('Clarity'),
-                      Text('Symmetry'),
-                      Text('Fluorescence'),
+                      Text(AppConstants.cut),
+                      Text(AppConstants.polish),
+                      Text(AppConstants.clarity),
+                      Text(AppConstants.symmetry),
+                      Text(AppConstants.fluorescence),
                     ],
                   ),
                 ),
@@ -189,11 +190,11 @@ class _MyCartPageState extends State<MyCartPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CommonWidgets().buildAmountWidget(
-                title: 'Per Carate Rate',
+                title: AppConstants.perCarateRate,
                 amount: diamond.perCaratRate.toString(),
               ),
               CommonWidgets().buildAmountWidget(
-                title: 'Final Amount',
+                title: AppConstants.finalAmount,
                 amount: diamond.finalAmount.toString(),
               ),
             ],

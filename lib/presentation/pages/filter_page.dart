@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kgk_diamond/common/constants.dart';
 import 'package:kgk_diamond/logic/data_logic/diamond_data_cubit.dart';
 import 'package:kgk_diamond/logic/data_logic/diamond_data_state.dart';
 import 'package:kgk_diamond/presentation/common_widgets.dart';
@@ -28,7 +29,7 @@ class _FilterPageState extends State<FilterPage> {
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(
-          "Filter",
+          AppConstants.filter,
           style: CommonWidgets().textStyle(color: Colors.white, fSize: 25),
         ),
       ),
@@ -84,22 +85,22 @@ class _FilterPageState extends State<FilterPage> {
             buildCaratesWidget(data: state.carates, loadedState: state),
             buildFilterDataWidget(
               data: state.labs,
-              title: "Labs",
+              title: AppConstants.labs,
               loadedState: state,
             ),
             buildFilterDataWidget(
               data: state.shapes,
-              title: "Shaps",
+              title: AppConstants.shaps,
               loadedState: state,
             ),
             buildFilterDataWidget(
               data: state.color,
-              title: "Colors",
+              title: AppConstants.colors,
               loadedState: state,
             ),
             buildFilterDataWidget(
               data: state.clarity,
-              title: "Clarity",
+              title: AppConstants.clarity,
               loadedState: state,
             ),
             SizedBox(height: 70),
@@ -126,7 +127,7 @@ class _FilterPageState extends State<FilterPage> {
         children: [
           CommonWidgets().filterItemTitleText(
             context: context,
-            title: "Carates",
+            title: AppConstants.carates,
             textColor: Colors.black,
             bgColor: const Color.fromARGB(31, 144, 142, 142),
             borderColor: Colors.black12,
@@ -183,7 +184,7 @@ class _FilterPageState extends State<FilterPage> {
             child: CommonWidgets().commonTextFormField(
               loadedState: loadedState,
               diamondDataCubit: diamondDataCubit,
-              title: "From",
+              title: AppConstants.from,
               validationValue: data.first.toString(),
               controller: diamondDataCubit.fromCarateController,
               context: context,
@@ -192,7 +193,7 @@ class _FilterPageState extends State<FilterPage> {
           SizedBox(width: 20),
           Expanded(
             child: CommonWidgets().commonTextFormField(
-              title: "To",
+              title: AppConstants.to,
               validationValue: data.last.toString(),
               controller: diamondDataCubit.toCarateController,
               context: context,
@@ -233,25 +234,25 @@ class _FilterPageState extends State<FilterPage> {
               return GestureDetector(
                 onTap: () {
                   switch (title) {
-                    case "Labs":
+                    case AppConstants.labs:
                       diamondDataCubit.updateSelectedLabs(
                         loadedState: loadedState,
                         item: cData,
                       );
                       break;
-                    case "Shaps":
+                    case AppConstants.shaps:
                       diamondDataCubit.updateSelectedShapes(
                         loadedState: loadedState,
                         item: cData,
                       );
                       break;
-                    case "Colors":
+                    case AppConstants.colors:
                       diamondDataCubit.updateSelectedColors(
                         loadedState: loadedState,
                         item: cData,
                       );
                       break;
-                    case "Clarity":
+                    case AppConstants.clarity:
                       diamondDataCubit.updateSelectedClarities(
                         loadedState: loadedState,
                         item: cData,
@@ -286,8 +287,8 @@ class _FilterPageState extends State<FilterPage> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          buildButton(title: "Reset", state: state),
-          buildButton(title: "Search", state: state),
+          buildButton(title: AppConstants.reset, state: state),
+          buildButton(title: AppConstants.search, state: state),
         ],
       ),
     );
@@ -299,23 +300,23 @@ class _FilterPageState extends State<FilterPage> {
   }) {
     return GestureDetector(
       onTap: () {
-        if (canFilter() && title == 'Search') {
+        if (canFilter() && title == AppConstants.search) {
           diamondDataCubit.filterData(loadedState: state);
         }
-        if (title == 'Reset') {
+        if (title == AppConstants.reset) {
           diamondDataCubit.resetFilterData(loadedState: state);
         }
       },
       child: CommonWidgets().commonButton(
         title: title,
         buttonColor:
-            title == 'Reset'
+            title == AppConstants.reset
                 ? Colors.white
                 : canFilter() == true
                 ? Colors.green
                 : const Color.fromARGB(255, 232, 228, 228),
         textColor:
-            title == 'Reset'
+            title == AppConstants.reset
                 ? Colors.black
                 : canFilter() == true
                 ? Colors.white
@@ -326,19 +327,19 @@ class _FilterPageState extends State<FilterPage> {
 
   getColor({required String title, required String item}) {
     switch (title) {
-      case "Labs":
+      case AppConstants.labs:
         return diamondDataCubit.selectedLabs.contains(item)
             ? Colors.green.shade100
             : Colors.transparent;
-      case "Shaps":
+      case AppConstants.shaps:
         return diamondDataCubit.selectedShapes.contains(item)
             ? Colors.green.shade100
             : Colors.transparent;
-      case "Colors":
+      case AppConstants.colors:
         return diamondDataCubit.selectedColors.contains(item)
             ? Colors.green.shade100
             : Colors.transparent;
-      case "Clarity":
+      case AppConstants.clarity:
         return diamondDataCubit.selectedClarities.contains(item)
             ? Colors.green.shade100
             : Colors.transparent;

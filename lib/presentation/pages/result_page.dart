@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:kgk_diamond/common/constants.dart';
 import 'package:kgk_diamond/data/entity/diamond_entity.dart';
 import 'package:kgk_diamond/logic/data_logic/diamond_data_cubit.dart';
 import 'package:kgk_diamond/logic/data_logic/diamond_data_state.dart';
@@ -33,7 +34,10 @@ class _ResultPageState extends State<ResultPage> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("Search Result", style: TextStyle(color: Colors.white)),
+        title: Text(
+          AppConstants.searchResult,
+          style: TextStyle(color: Colors.white),
+        ),
         actions: buildAppBarActionButton(context),
       ),
       body: BlocBuilder<DiamondDataCubit, DiamondDataState>(
@@ -41,7 +45,7 @@ class _ResultPageState extends State<ResultPage> {
           if (state is DiamondDataLoadedState) {
             return buildListView(state: state);
           } else {
-            return Center(child: Text("Something went wronge"));
+            return Center(child: Text(AppConstants.somethingWentWrong));
           }
         },
       ),
@@ -92,7 +96,7 @@ class _ResultPageState extends State<ResultPage> {
               ],
             ),
             Text(
-              "My Cart",
+              AppConstants.myCart,
               style: CommonWidgets().textStyle(
                 fSize: 10,
                 fontWeight: FontWeight.bold,
@@ -163,11 +167,11 @@ class _ResultPageState extends State<ResultPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Carate'),
-                      Text('Size'),
-                      Text('Lab'),
-                      Text('Shape'),
-                      Text('Color'),
+                      Text(AppConstants.carates),
+                      Text(AppConstants.size),
+                      Text(AppConstants.labs),
+                      Text(AppConstants.shaps),
+                      Text(AppConstants.colors),
                     ],
                   ),
                 ),
@@ -189,11 +193,11 @@ class _ResultPageState extends State<ResultPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Cut'),
-                      Text('Polish'),
-                      Text('Clarity'),
-                      Text('Symmetry'),
-                      Text('Fluorescence'),
+                      Text(AppConstants.cut),
+                      Text(AppConstants.polish),
+                      Text(AppConstants.clarity),
+                      Text(AppConstants.symmetry),
+                      Text(AppConstants.fluorescence),
                     ],
                   ),
                 ),
@@ -217,11 +221,11 @@ class _ResultPageState extends State<ResultPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CommonWidgets().buildAmountWidget(
-                title: 'Per Carate Rate',
+                title: AppConstants.perCarateRate,
                 amount: diamond[index].perCaratRate.toString(),
               ),
               CommonWidgets().buildAmountWidget(
-                title: 'Final Amount',
+                title: AppConstants.finalAmount,
                 amount: diamond[index].finalAmount.toString(),
               ),
             ],
@@ -264,7 +268,6 @@ class _ResultPageState extends State<ResultPage> {
                 : 'assets/icons/shopping-cart-add.svg',
             height: 20,
             width: 20,
-            semanticsLabel: 'Dart Logo',
           ),
         );
       },
