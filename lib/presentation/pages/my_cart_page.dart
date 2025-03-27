@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kgk_diamond/data/models/data_model.dart';
+import 'package:kgk_diamond/data/entity/diamond_entity.dart';
 import 'package:kgk_diamond/logic/data_logic/diamond_data_cubit.dart';
 import 'package:kgk_diamond/logic/filterResult/filter_result_cubit.dart';
 import 'package:kgk_diamond/logic/myCart/my_cart_cubit.dart';
@@ -92,7 +92,7 @@ class _MyCartPageState extends State<MyCartPage> {
     );
   }
 
-  Widget buildDetailsWidget({required DiamondData diamond}) {
+  Widget buildDetailsWidget({required DiamondEntity diamond}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -147,11 +147,11 @@ class _MyCartPageState extends State<MyCartPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(": ${diamond.carat ?? ''}"),
-                    Text(": ${diamond.size ?? ''}"),
-                    Text(": ${diamond.lab ?? ''}"),
-                    Text(": ${diamond.shape.toString()}"),
-                    Text(": ${diamond.color.toString()}"),
+                    Text(": ${diamond.carat}"),
+                    Text(": ${diamond.size}"),
+                    Text(": ${diamond.lab}"),
+                    Text(": ${diamond.shape}"),
+                    Text(": ${diamond.color}"),
                   ],
                 ),
                 VerticalDivider(thickness: 2, color: Colors.black26),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kgk_diamond/data/models/data_model.dart';
+import 'package:kgk_diamond/data/entity/diamond_entity.dart';
 import 'package:kgk_diamond/logic/data_logic/diamond_data_cubit.dart';
 import 'package:kgk_diamond/logic/data_logic/diamond_data_state.dart';
 import 'package:kgk_diamond/presentation/pages/filter_page.dart';
@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
     return ListView.builder(
       itemCount: state.diamondData.length,
       itemBuilder: (context, index) {
-        DiamondData data = state.diamondData[index];
+        DiamondEntity data = state.diamondData[index];
         return ListTile(title: Text(data.carat.toString()));
       },
     );

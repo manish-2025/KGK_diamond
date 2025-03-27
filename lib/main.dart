@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:kgk_diamond/common/constants.dart';
+import 'package:kgk_diamond/data/entity/diamond_entity.dart';
 import 'package:kgk_diamond/logic/data_logic/diamond_data_cubit.dart';
 import 'package:kgk_diamond/logic/filterResult/filter_result_cubit.dart';
 import 'package:kgk_diamond/logic/myCart/my_cart_cubit.dart';
+import 'package:kgk_diamond/presentation/globals.dart';
 import 'package:kgk_diamond/presentation/pages/filter_page.dart';
+import 'package:path_provider/path_provider.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final appDocumentDirectory = await getApplicationDocumentsDirectory();
+  Hive
+    ..init(appDocumentDirectory.path)
+    ..registerAdapter(DiamondEntityAdapter());
+  await Hive.openBox(HiveConstants.DIAMOND_BOX);
+  diamondBox = Hive.box(HiveConstants.DIAMOND_BOX);
+  hiveCardData = List<DiamondEntity>.from(
+    await diamondBox.get(HiveConstants.MY_CART_ITEM) ?? [],
+  );
   runApp(const MyApp());
 }
 

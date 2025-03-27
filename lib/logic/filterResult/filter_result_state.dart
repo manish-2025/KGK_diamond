@@ -11,7 +11,7 @@ class FilterResultInitial extends FilterResultState {}
 
 // ignore: must_be_immutable
 class FilterResultLoadedState extends FilterResultState {
-  List<DiamondData> filteredDiamondData;
+  List<DiamondEntity> filteredDiamondData;
   final double random;
 
   FilterResultLoadedState({
@@ -20,7 +20,7 @@ class FilterResultLoadedState extends FilterResultState {
   });
 
   FilterResultLoadedState copyWith({
-    required List<DiamondData>? filteredDiamondData,
+    required List<DiamondEntity>? filteredDiamondData,
     double? random,
   }) {
     return FilterResultLoadedState(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:kgk_diamond/data/models/data_model.dart';
+import 'package:kgk_diamond/data/entity/diamond_entity.dart';
 import 'package:kgk_diamond/logic/data_logic/diamond_data_cubit.dart';
 import 'package:kgk_diamond/logic/data_logic/diamond_data_state.dart';
 import 'package:kgk_diamond/logic/filterResult/filter_result_cubit.dart';
@@ -23,6 +23,7 @@ class _ResultPageState extends State<ResultPage> {
   void initState() {
     diamondDataCubit = BlocProvider.of<DiamondDataCubit>(context);
     filterResultCubit = BlocProvider.of<FilterResultCubit>(context);
+    filterResultCubit.getCartData();
     super.initState();
   }
 
@@ -118,7 +119,7 @@ class _ResultPageState extends State<ResultPage> {
   }
 
   Widget buildDetailsWidget({
-    required List<DiamondData> diamond,
+    required List<DiamondEntity> diamond,
     required int index,
     required DiamondDataLoadedState state,
   }) {
@@ -174,11 +175,11 @@ class _ResultPageState extends State<ResultPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(": ${diamond[index].carat ?? ''}"),
-                    Text(": ${diamond[index].size ?? ''}"),
-                    Text(": ${diamond[index].lab ?? ''}"),
-                    Text(": ${diamond[index].shape.toString()}"),
-                    Text(": ${diamond[index].color.toString()}"),
+                    Text(": ${diamond[index].carat}"),
+                    Text(": ${diamond[index].size}"),
+                    Text(": ${diamond[index].lab}"),
+                    Text(": ${diamond[index].shape}"),
+                    Text(": ${diamond[index].color}"),
                   ],
                 ),
                 VerticalDivider(thickness: 2, color: Colors.black26),
@@ -230,12 +231,16 @@ class _ResultPageState extends State<ResultPage> {
     );
   }
 
-  Widget buildCartIcon({required DiamondData data}) {
+  Widget buildCartIcon({required DiamondEntity data}) {
     return BlocBuilder<FilterResultCubit, FilterResultState>(
       builder: (context, fRState) {
         return GestureDetector(
           onTap: () async {
-            if (filterResultCubit.myCardItem.contains(data)) {
+            bool existsByName = filterResultCubit.myCardItem.any(
+              (person) => person.lotID == data.lotID,
+            );
+
+            if (existsByName) {
               bool returnVal = await buildDialog(context);
 
               if (returnVal == true) {
@@ -252,7 +257,9 @@ class _ResultPageState extends State<ResultPage> {
             }
           },
           child: SvgPicture.asset(
-            filterResultCubit.myCardItem.contains(data)
+            filterResultCubit.myCardItem.any(
+                  (person) => person.lotID == data.lotID,
+                )
                 ? 'assets/icons/shopping-cart2.svg'
                 : 'assets/icons/shopping-cart-add.svg',
             height: 20,

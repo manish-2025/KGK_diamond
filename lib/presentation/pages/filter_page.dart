@@ -48,9 +48,6 @@ class _FilterPageState extends State<FilterPage> {
               context,
               MaterialPageRoute(builder: (context) => ResultPage()),
             );
-          } else {
-            // ignore: avoid_print
-            print("object => Something went wronge");
           }
         },
         builder: (context, state) {

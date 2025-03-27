@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:kgk_diamond/data/entity/diamond_entity.dart';
 import 'package:kgk_diamond/data/models/data_model.dart';
 import 'package:kgk_diamond/data/repositories/data_repository.dart';
 import 'package:kgk_diamond/logic/data_logic/diamond_data_state.dart';
@@ -25,9 +26,9 @@ class DiamondDataCubit extends Cubit<DiamondDataState> {
   List<String> shapes = [];
   List<String> color = [];
   List<String> clarity = [];
-  List<DiamondData> myCardItem = [];
-  List<DiamondData> diamondData = [];
-  List<DiamondData> filteredDiamondData = [];
+  List<DiamondEntity> myCardItem = [];
+  List<DiamondEntity> diamondData = [];
+  List<DiamondEntity> filteredDiamondData = [];
 
   void fetchData() async {
     try {
@@ -36,11 +37,11 @@ class DiamondDataCubit extends Cubit<DiamondDataState> {
       diamondData = diamondDataModel.diamondData ?? [];
 
       if (diamondData.isNotEmpty) {
-        carates.addAll(diamondData.map((ddata) => ddata.carat ?? 0.0));
-        labs.addAll(diamondData.map((ddata) => ddata.lab ?? "NA"));
-        shapes.addAll(diamondData.map((ddata) => ddata.shape ?? "NA"));
-        color.addAll(diamondData.map((ddata) => ddata.color ?? "NA"));
-        clarity.addAll(diamondData.map((ddata) => ddata.clarity ?? "NA"));
+        carates.addAll(diamondData.map((ddata) => ddata.carat));
+        labs.addAll(diamondData.map((ddata) => ddata.lab));
+        shapes.addAll(diamondData.map((ddata) => ddata.shape));
+        color.addAll(diamondData.map((ddata) => ddata.color));
+        clarity.addAll(diamondData.map((ddata) => ddata.clarity));
 
         carates.sort();
         labs.sort();
@@ -168,10 +169,9 @@ class DiamondDataCubit extends Cubit<DiamondDataState> {
 
   void filterData({required DiamondDataLoadedState loadedState}) {
     filteredDiamondData.addAll(diamondData);
-    selectedCarates.clear();
     if (fromCarateController.text.isNotEmpty ||
         toCarateController.text.isNotEmpty) {
-      List<double> cData = diamondData.map((item) => item.carat ?? 0).toList();
+      List<double> cData = diamondData.map((item) => item.carat).toList();
       cData.sort();
       double fromData =
           fromCarateController.text.isEmpty

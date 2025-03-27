@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:kgk_diamond/data/entity/diamond_entity.dart';
 import 'package:kgk_diamond/data/models/data_model.dart';
 
 class DiamondDataState extends Equatable {
@@ -12,8 +13,8 @@ class DiamondDataBlocInitial extends DiamondDataState {}
 
 // ignore: must_be_immutable
 class DiamondDataLoadedState extends DiamondDataState {
-  final List<DiamondData> diamondData;
-  List<DiamondData> filteredDiamondData = [];
+  final List<DiamondEntity> diamondData;
+  List<DiamondEntity> filteredDiamondData = [];
   final List<double> carates;
   final List<String> labs;
   final List<String> shapes;
