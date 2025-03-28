@@ -1,9 +1,8 @@
 // ignore_for_file: annotate_overrides, overridden_fields
 
 import 'package:kgk_diamond/data/entity/diamond_entity.dart';
-import 'package:kgk_diamond/data/model_response.dart';
 
-class DiamondDataModel extends ModelResponseExtend {
+class DiamondDataModel {
   final List<DiamondEntity>? diamondData;
 
   DiamondDataModel({this.diamondData});

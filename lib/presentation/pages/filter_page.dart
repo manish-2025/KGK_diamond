@@ -25,9 +25,8 @@ class _FilterPageState extends State<FilterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(
           AppConstants.filter,
           style: CommonWidgets().textStyle(color: Colors.white, fSize: 25),
@@ -116,10 +115,11 @@ class _FilterPageState extends State<FilterPage> {
   }) {
     return Container(
       decoration: BoxDecoration(
+        color: Colors.white,
         border: Border.all(color: Colors.black26),
         borderRadius: BorderRadius.circular(5),
       ),
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      margin: EdgeInsets.only(left: 10, top: 15, right: 10, bottom: 5),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -211,10 +211,11 @@ class _FilterPageState extends State<FilterPage> {
   }) {
     return Container(
       decoration: BoxDecoration(
+        color: Colors.white,
         border: Border.all(color: Colors.black26),
         borderRadius: BorderRadius.circular(5),
       ),
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
 
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,

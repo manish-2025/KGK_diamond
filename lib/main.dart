@@ -39,7 +39,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          primaryColor: Colors.red,
+          appBarTheme: AppBarTheme(
+            iconTheme: IconThemeData(color: Colors.white),
+            color: const Color.fromARGB(255, 15, 0, 55),
+          ),
         ),
         home: const FilterPage(),
       ),
