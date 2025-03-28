@@ -12,6 +12,11 @@ import 'package:path_provider/path_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await initThings();
+  runApp(const MyApp());
+}
+
+Future<void> initThings() async {
   final appDocumentDirectory = await getApplicationDocumentsDirectory();
   Hive
     ..init(appDocumentDirectory.path)
@@ -21,7 +26,6 @@ void main() async {
   hiveCardData = List<DiamondEntity>.from(
     await diamondBox.get(HiveConstants.MY_CART_ITEM) ?? [],
   );
-  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

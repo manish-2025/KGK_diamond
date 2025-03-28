@@ -169,6 +169,7 @@ class DiamondDataCubit extends Cubit<DiamondDataState> {
 
   void filterData({required DiamondDataLoadedState loadedState}) {
     filteredDiamondData.addAll(diamondData);
+
     if (fromCarateController.text.isNotEmpty ||
         toCarateController.text.isNotEmpty) {
       List<double> cData = diamondData.map((item) => item.carat).toList();
@@ -190,13 +191,13 @@ class DiamondDataCubit extends Cubit<DiamondDataState> {
           diamondData.where((data) {
             return selectedCarates.contains(data.carat);
           }).toList();
-    } else {
+    }
+    if (selectedCarates.isNotEmpty) {
       filteredDiamondData =
           diamondData.where((data) {
             return selectedCarates.contains(data.carat);
           }).toList();
     }
-
     filteredDiamondData.where((data) {
       return selectedClarities.contains(data.clarity);
     });
@@ -210,7 +211,7 @@ class DiamondDataCubit extends Cubit<DiamondDataState> {
     filteredDiamondData.where((data) {
       return selectedShapes.contains(data.shape);
     });
-
+    print("object => 2 ${filteredDiamondData.length}");
     emit(
       DiamondDataLoadedState(
         carates: loadedState.carates,
